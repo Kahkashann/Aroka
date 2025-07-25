@@ -9,7 +9,8 @@ import { useCart } from '../context/CartContext';
 const Navbar = ({ onCartClick }) => {
     const location = useLocation();
     const isHomePage = location.pathname === '/';
-    const isProductDetailsPage = location.pathname.startsWith('/product/') && location.pathname.split('/').length > 2;
+    // Simplified product details page check for clarity, ensure it's accurate for your URLs
+    const isProductDetailsPage = location.pathname.startsWith('/product/') && location.pathname.split('/').filter(Boolean).length === 2; // e.g., /product/some-slug
     const isCondensedPage = ['/account', '/pages/wishlist'].includes(location.pathname);
     const isAboutUsPage = location.pathname === '/about-us';
 
@@ -18,8 +19,8 @@ const Navbar = ({ onCartClick }) => {
     const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
     const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
-    const [isNavbarVisible, setIsNavbarVisible] = useState(true);
-    const [scrolled, setScrolled] = useState(0);
+    const [isNavbarVisible, setIsNavbarVisible] = useState(true); // Controls whether navbar slides in/out
+    const [scrolled, setScrolled] = useState(0); // Tracks scroll position
     const prevScrollY = useRef(0);
 
     useEffect(() => {
@@ -33,6 +34,7 @@ const Navbar = ({ onCartClick }) => {
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
+            // Navbar visibility (slide in/out) remains the same
             setIsNavbarVisible(currentScrollY < prevScrollY.current || currentScrollY < 10);
             setScrolled(currentScrollY);
             prevScrollY.current = currentScrollY;
@@ -56,42 +58,53 @@ const Navbar = ({ onCartClick }) => {
     const mainMenuItems = ['Shop', 'BestSellers', 'New Arrival', 'About', 'Sale'];
 
     const getNavbarStyles = () => {
-        const shouldHaveTransparentBackground =
-            (isHomePage || isProductDetailsPage || isAboutUsPage) && 
-            scrolled < 10 &&
-            !isSearchBarOpen &&
-            !(isMobile && isLeftSidebarOpen);
+        // Determine if the page is one that *can* have a transparent background based on initial design
+        const isAlwaysTransparentBackgroundPage = isProductDetailsPage; // Always transparent on product details
+        const isInitiallyTransparentBackgroundPage = isHomePage || isAboutUsPage; // Transparent only at top of page
 
-        let backgroundColor = "bg-white"; 
-        let textColor = "text-black";    
+        let backgroundColor = "bg-white";
+        let textColor = "text-black";
         let logoSrc = "/logo-black.avif";
-        let logoHeight = "h-10"; 
+        let logoHeight = "h-10";
+        let underlineColor = "bg-black"; // Default underline color
 
-        if (shouldHaveTransparentBackground) {
-            backgroundColor = ""; 
+        // Logic for transparent background
+        const shouldBeTransparentOnScroll = isAlwaysTransparentBackgroundPage; // PD page always transparent
+        const shouldBeTransparentAtTop = isInitiallyTransparentBackgroundPage && scrolled < 10; // Home/About only transparent at top
 
-            if (isHomePage || isAboutUsPage) { 
-                textColor = "text-white";
-                logoSrc = "/logo-white.avif";
-                logoHeight = "h-8";
-            } else if (isProductDetailsPage) {
+        if (shouldBeTransparentOnScroll || shouldBeTransparentAtTop) {
+            backgroundColor = ""; // Make background transparent
+
+            // Determine text and logo color for transparent background
+            if (isAlwaysTransparentBackgroundPage) {
+                // For Product Details Page, transparent background, black text/logo
                 textColor = "text-black";
                 logoSrc = "/logo-black.avif";
                 logoHeight = "h-10";
+                underlineColor = "bg-black";
+            } else if (isInitiallyTransparentBackgroundPage) {
+                // For Home/About Page when transparent (at top of page)
+                textColor = "text-white";
+                logoSrc = "/logo-white.avif";
+                logoHeight = "h-8";
+                underlineColor = "bg-white";
             }
         }
 
+        // Overrides for mobile sidebar or search bar being open
         if (isMobile && isLeftSidebarOpen || isSearchBarOpen) {
             backgroundColor = "bg-white";
             textColor = "text-black";
-            logoSrc = "/logo-black.avif"; 
+            logoSrc = "/logo-black.avif";
             logoHeight = "h-10";
+            underlineColor = "bg-black";
         }
 
         return {
             textColor: textColor,
-            hoverTextColor: (shouldHaveTransparentBackground && (isHomePage || isAboutUsPage)) ? "hover:text-gray-300" : "hover:text-gray-600", // Added isAboutUsPage
-            underlineColor: (shouldHaveTransparentBackground && (isHomePage || isAboutUsPage)) ? "bg-white" : "bg-black", // Added isAboutUsPage
+            // Adjust hover color based on whether it's a "light" (white text/logo) transparent state
+            hoverTextColor: (shouldBeTransparentAtTop && !isMobile) ? "hover:text-gray-300" : "hover:text-gray-600",
+            underlineColor: underlineColor,
             backgroundColor: backgroundColor,
             logoSrc: logoSrc,
             logoHeight: logoHeight
