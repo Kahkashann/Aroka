@@ -243,8 +243,8 @@ const DesktopMenu = ({ toggleLeftSidebar, handleMouseLeaveNavbar }) => {
 					animate={{ opacity: 1, y: 0, transition: { delay: 0.4 } }}
 				>
 					{[
-						{ src: '/new-in.png', label: 'New In', to: '/new-arrival' },
-						{ src: '/celebrity-closet.jpeg', label: 'Celebrity Closet', to: '/celebrity-closet' },
+						{ src: '/new-in.png', label: 'New In', to: '/new-arrivals' },
+						{ src: '/celebrity-closet.jpeg', label: 'Best Sellers', to: '/best-sellers' },
 					].map(({ src, label, to }) => (
 						<motion.div
 							key={label}
