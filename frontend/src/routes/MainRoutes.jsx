@@ -13,11 +13,7 @@ import ProductDetailsPage from '../pages/ProductDetailsPage';
 import LookBooksPage from '../pages/LookBooksPage';
 
 const MainRoutes = ({ onAddToCartSuccess }) => {
-	const { isAuthenticated, isLoading } = useAuth();
-
-	if (isLoading) {
-		return <div>Loading...</div>; 
-	}
+	const { isAuthenticated } = useAuth();
 
 	return (
 		<Routes>

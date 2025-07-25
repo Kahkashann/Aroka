@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
+body {
+  overflow-x: hidden !important;
+}
 
 .scrollbar-hidden {
-  scrollbar-width: none; 
+  scrollbar-width: none;
   -ms-overflow-style: none;
 }
 .scrollbar-hidden::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
