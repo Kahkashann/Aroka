@@ -6,7 +6,7 @@ import ProductCard from '../components/ProductCard';
 import FilterSidebar from '../components/FilterSidebar';
 import CustomSortDropdown from '../components/CustomSortDropdown';
 import Breadcrumbs from '../components/BreadCrumbs';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ListFilter } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 

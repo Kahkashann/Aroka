@@ -10,7 +10,6 @@ import FeaturedSection from '../components/FeaturedSection';
 const HomePage = () => {
 	const newArrivals = allProducts.slice(0, 8);
 	const bestsellers = allProducts.filter(product => product.isBestseller);
-	console.log(bestsellers)
 
 	const [isPearlfallHovered, setIsPearlfallHovered] = useState(false);
 	const pearlfallMainImg = "/pearlfall-set.png";
