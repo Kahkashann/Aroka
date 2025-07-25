@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 
-const Breadcrumbs = () => {
+const BreadCrumbs = () => {
     const location = useLocation();
     const { category, subcategory, collectionName } = useParams();
 
@@ -86,4 +86,4 @@ const Breadcrumbs = () => {
     );
 };
 
-export default Breadcrumbs;
+export default BreadCrumbs;
