@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 import { products as allProducts } from '../data/productData';
 import ProductCard from '../components/ProductCard';
 import InteractiveImageSection from '../components/InteractiveImageSection';
-import AboutUsStorySection from '../components/AboutusStorySection';
+import AboutUsStorySection from '../components/AboutUsStorySection';
 import FeaturedSection from '../components/FeaturedSection';
 
 const HomePage = () => {
