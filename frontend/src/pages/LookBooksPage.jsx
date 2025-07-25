@@ -1,6 +1,7 @@
 import React from 'react'
 import Breadcrumbs from '../components/BreadCrumbs'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const LookBooksPage = () => {
 

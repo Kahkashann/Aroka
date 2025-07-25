@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useScroll, useTransform } from 'framer-motion';
+import {motion, useScroll, useTransform } from 'framer-motion';
 import { products as allProducts } from '../data/productData';
 import ProductCard from '../components/ProductCard';
 import InteractiveImageSection from '../components/InteractiveImageSection';
