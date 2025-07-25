@@ -1,11 +1,13 @@
 // src/config/axios.js
-import axios from 'axios';
+import axios from "axios";
+
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: `${backendUrl}/api`,
   withCredentials: true,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
