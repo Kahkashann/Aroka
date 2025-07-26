@@ -236,7 +236,7 @@ const MobileMenu = ({ isLeftSidebarOpen, toggleLeftSidebar }) => {
                         {currentView === 'main' && (
                             <div className="flex justify-center w-full mb-6 gap-4">
                                 {[
-                                    { to: '/new-in', img: '/new-in.png', label: 'New In' },
+                                    { to: '/new-arrivals', img: '/new-in.png', label: 'New In' },
                                     { to: '/best-sellers', img: '/celebrity-closet.jpeg', label: 'Best Sellers' },
                                 ].map(({ to, img, label }) => (
                                     <motion.div
